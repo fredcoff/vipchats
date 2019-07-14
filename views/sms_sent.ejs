@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vip-Chats - Subscriptions</title>
+
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/jquery.dynatable.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.dynatable.js"></script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+<%- include menu.ejs %>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> List of Messages Sent
+            </div>
+            <div class="card-body">
+                <p>
+                    <button class="btn btn-success" onclick="history.go(-1);"><i class="fa fa-arrow-circle-left"></i> Back</button>
+                </p>
+                <table class="table table-bordered">
+                    <thead>
+                        <th>Phone</th>
+                        <th>Date</th>
+                        <th>Message</th>
+                    </thead>
+                    <tbody>
+                    <% for(let i = 0;i<sentmsgs.length; i++) { %>
+                        <tr>
+                            <td>
+                                <%=sentmsgs[i]['phone']%>
+                            </td>
+                            <td>
+                                <%=sentmsgs[i]['date']%>
+                            </td>
+                            <td>
+                                <%=sentmsgs[i]['text']%>
+                            </td>
+                        </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+ </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+<script type="text/javascript">
+function sendSMS( m_id  ){
+    $("#inputtext").val($("#"+m_id).val());
+    $("#inputmsgtype").val( m_id );
+    $("form").submit();
+}
+</script>
+</body>
+</html>

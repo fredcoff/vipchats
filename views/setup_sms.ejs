@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vip-Chats - SMS Settings</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/jquery.dynatable.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.dynatable.js"></script>
+</head>
+
+<style>
+    .form-control-plaintext{
+        width:100%;
+    }
+</style>
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+<%- include menu.ejs %>
+<div class="content-wrapper">
+    <div class="container">
+        <div class="card mb-3">
+            <div class="card-body"  >
+                <h1 align="center">Enable sending automatically SMS</h1>
+                <h6>  <%- message %>  </h6>
+                <br/>
+                <form action="/setup_sms_save" method="post">
+                <div class="row">
+                    <div class="col-md-6" align="center">
+                        <div style="width:200px;" align="left">
+                            <div class="form-check" >
+                                <input name="setupWelcomeMsg" class="msg-check form-check-input form-control-lg" type="checkbox" <%=(hoteldata['setupWelcomeMsg']?"checked":"")%> >
+                                <label class="form-check-label" for="defaultCheck1"  >
+                                    Welcome
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="setupCancelMsg" class="msg-check form-check-input form-control-lg" type="checkbox" <%=(hoteldata['setupCancelMsg']?"checked":"")%> >
+                                <label class="form-check-label" for="defaultCheck1">
+                                    Cancelation
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="setupReminderMsg" class="msg-check form-check-input form-control-lg" type="checkbox" <%=(hoteldata['setupReminderMsg']?"checked":"")%> >
+                                <label class="form-check-label" for="defaultCheck1">
+                                    Reminder
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input name="setupPromotionMsg" class="msg-check form-check-input form-control-lg" type="checkbox" <%=(hoteldata['setupPromotionMsg']?"checked":"")%> >
+                            <label class="form-check-label" for="defaultCheck1">
+                                Promotion
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>Days after checkout</label>&nbsp;
+                            <input name="PromotionDay1" type="number"  value="<%=hoteldata['PromotionDay1']%>" min="1"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Days after checkout</label>&nbsp;
+                            <input name="PromotionDay2" type="number" value="<%=hoteldata['PromotionDay2']%>" min="1"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <input type="submit" value="Save Settings" class="btn btn-primary btn-lg"/>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="mymodal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label id="description">Description of message</label>
+                <textarea style="width:100%" rows="5"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="savetext()">Save Message Change</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div hidden>
+    <div id="text_welcome"><%=hoteldata['textWelcomeMsg']%></div>
+    <div id="text_cancel"><%=hoteldata['textCancelMsg']%></div>
+    <div id="text_reminder"><%=hoteldata['textReminderMsg']%></div>
+    <div id="text_promotion"><%=hoteldata['textPromotionMsg']%></div>
+</div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+</a>
+<script>
+    let curmsg = '';
+$(".msg-check").click(function(e) {
+    if($(this).prop('checked')){
+        if($(this).attr('name')=='setupWelcomeMsg'){
+            $(".modal-title").text('Welcome message settings');
+            $(".modal-body textarea").text( $("#text_welcome").text() );
+            curmsg = 'welcome';
+        }
+        if($(this).attr('name')=='setupCancelMsg'){
+            $(".modal-title").text('Cancellation message settings');
+            $(".modal-body textarea").text( $("#text_cancel").text() );
+            curmsg = 'cancel';
+        }
+        if($(this).attr('name')=='setupReminderMsg'){
+            $(".modal-title").text('Reminder message settings');
+            $(".modal-body textarea").text( $("#text_reminder").text() );
+            curmsg = 'reminder';
+        }
+        if($(this).attr('name')=='setupPromotionMsg'){
+            $(".modal-title").text('Promotion message settings');
+            $(".modal-body textarea").text( $("#text_promotion").text() );
+            curmsg = 'promotion';
+        }
+        $("#mymodal").modal();
+    }
+});
+
+function savetext() {
+    $.post("/setup_sms_save_text",{
+        'keyname': curmsg ,
+        'msgtext': $(".modal-body textarea").val()
+    },function(res){
+        if ( res.action == 'error'){
+            alert(res.message);
+        }else{
+            alert(res.message);
+            $("#mymodal").modal('dismiss');
+        }
+    });
+}
+</script>
+</body>
+</html>

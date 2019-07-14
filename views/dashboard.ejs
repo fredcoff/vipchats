@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vip-Chats</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/jquery.dynatable.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.dynatable.js"></script>
+
+    <script src="/js/page.js"></script>
+    <script src="/js/main.js"></script>
+</head>
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+    <%- include menu.ejs %>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-table"></i> Hotel Reservations</div>
+                <div class="card-body">
+                    <a href="javascript:location.href='/clients'" class="btn btn-info"><i class="fa fa-arrow-left"></i> Back</a>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="clientTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th style="display: none">_id</th>
+                                <th data-dynatable-column="firstname">First Name</th>
+                                <th data-dynatable-column="lastname">Last Name</th>
+                                <th>Phone</th>
+                                <th>City</th>
+                                <th  data-dynatable-column="is_protect">Protect</th>
+                                <th  data-dynatable-column="is_promo">Promotion</th>
+                                <th  data-dynatable-column="is_parking">Parking</th>
+                                <th  data-dynatable-column="is_checkin">Checkin</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer small text-muted">Updated at <i id="refreshTime">12:00</i></div>
+            </div>
+        </div>
+
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    </div>
+
+    <div id="bookingsModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Bookings</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered" id="bookingTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>Booked On</th>
+                            <th>Check In</th>
+                            <th>Check Out</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

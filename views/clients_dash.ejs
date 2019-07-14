@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vip-Chats - Client Manager</title>
+
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/jquery.dynatable.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.dynatable.js"></script>
+    <script src="/js/chart.js"></script>
+
+    <script src="/js/clients_dash.js"></script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+<%- include menu.ejs %>
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Client Manager for Hotel Sancho III
+            </div>
+            <div class="card-body">
+                <%-(message!=""?message:"")%>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="card">
+                            <div class="card-body">
+                                <table class="table table-bordered" id="booktable">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2">Bookings received <span id="totalbooking"></span></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>New clients</td>
+                                        <td>20</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Repeated clients</td>
+                                        <td>20</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Promotion clients</td>
+                                        <td>12</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="card">
+                            <div class="card-body">
+                                <table class="table table-bordered" id="msgtable">
+                                    <thead>
+                                        <tr>
+                                            <th>Messages</th>
+                                            <th>Today/Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Welcome</td>
+                                            <td>20 / 100</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cancellation</td>
+                                            <td>2 / 100</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Promotion</td>
+                                            <td>5 / 100</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Reminders</td>
+                                            <td>10 / 100</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Confirmation</td>
+                                            <td>10 / 100</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <canvas id="serviceStat" height="250px"> </canvas>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

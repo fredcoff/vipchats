@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vip-Chats - New Client</title>
+
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/jquery.dynatable.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.dynatable.js"></script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+<div class="content-wrapper">
+    <div class="container">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-plus"></i> Signup
+            </div>
+            <div class="card-body">
+               <form action="/signup" method="post" action="clients_api_new">
+                   <h1 align="center">Get Started with your 14-day free trial</h1>
+                   <div class="row">
+                       <div class="col-md-8">
+                           <br/>
+                           <h5 style="color:blue">Start your no obligation 14 day free trial of Vipchats solutions:</h5>
+                           <ul>
+                               <li>
+                                   Direct message to guest phone
+                               </li>
+                               <li>
+                                   Manage your guest authorisations paperless
+                                   <ul>
+                                       <li>Data protection approvals</li>
+                                       <li>Parking agreements</li>
+                                   </ul>
+                               </li>
+                           </ul>
+                       </div>
+                       <div class="col-md-4">
+                           <div class="form-group">
+                               <div class="col-md-12">
+                                   <input class="form-control" name="FirstName" id="FirstName" type="text" placeholder="First Name" required>
+                               </div>
+                           </div>
+                           <div class="form-group">
+                               <div class="col-md-12">
+                                   <input class="form-control" name="LastName" id="LastName" type="text" placeholder="Last Name" required>
+                               </div>
+                           </div>
+                           <div class="form-group">
+                               <div class="col-md-12">
+                                   <input class="form-control" name="Email" id="Email" type="email" placeholder="Email" required>
+                               </div>
+                           </div>
+                           <div class="form-group">
+                               <div class="col-md-12">
+                                   <input class="form-control" name="Phone" id="Phone" type="text" placeholder="Phone" required>
+                               </div>
+                           </div>
+                           <div class="form-group">
+                               <div class="col-md-12">
+                                   <input class="form-control" name="HotelName" id="HotelName" type="text" placeholder="Hotel Name" required>
+                               </div>
+                           </div>
+                           <div class="form-group">
+                               <div class="col-md-12">
+                                   <input class="form-control" name="NumberRooms" id="NumberRooms" type="number" placeholder="Number of rooms" required>
+                               </div>
+                           </div>
+                           <div class="form-group">
+                               <div class="col-md-12">
+                                   <select class="form-control" name="Country" id="Country">
+                                       <option>
+                                           Spain
+                                       </option>
+                                       <option disabled>────────────────────</option>
+                                       <option>
+                                       Austria
+                                       </option>
+                                       <option>
+                                       Belgium
+                                       </option>
+                                       <option>
+                                       Bulgaria
+                                       </option>
+                                       <option>
+                                       Croatia
+                                       </option>
+                                       <option>
+                                       Cyprus
+                                       </option>
+                                       <option>
+                                       Czech Republic
+                                       </option>
+                                       <option>
+                                       Denmark
+                                       </option>
+                                       <option>
+                                       Estonia
+                                       </option>
+                                       <option>
+                                       Finland
+                                       </option>
+                                       <option>
+                                       France
+                                       </option>
+                                       <option>
+                                       Germany
+                                       </option>
+                                       <option>
+                                       Greece
+                                       </option>
+                                       <option>
+                                       Hungary
+                                       </option>
+                                       <option>
+                                       Ireland
+                                       </option>
+                                       <option>
+                                       Italy
+                                       </option>
+                                       <option>
+                                       Latvia
+                                       </option>
+                                       <option>
+                                       Lithuania
+                                       </option>
+                                       <option>
+                                       Luxembourg
+                                       </option>
+                                       <option>
+                                       Malta
+                                       </option>
+                                       <option>
+                                       Netherlands
+                                       </option>
+                                       <option>
+                                       Poland
+                                       </option>
+                                       <option>
+                                       Portugal
+                                       </option>
+                                       <option>
+                                       Romania
+                                       </option>
+                                       <option>
+                                       Slovakia
+                                       </option>
+                                       <option>
+                                       Slovenia
+                                       </option>
+                                       <option>
+                                       Sweden
+                                       </option>
+                                       <option>
+                                       United Kingdom
+                                       </option>
+                                   </select>
+                               </div>
+                           </div>
+                           <div class="form-group">
+                               <div class="col-md-12">
+                                   <input class="form-control" name="Address" id="Address" type="text" placeholder="Address" required>
+                               </div>
+                           </div>
+                           <div class="form-group">
+                               <div class="col-md-12">
+                                   <textarea class="form-control" name="Comments" id="Comments" type="text" placeholder="Comments"></textarea>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="row">
+                       <div class="col-md-12" align="center">
+                           <a class="btn btn-info btn-lg" onclick="javascript:history.go(-1);">Back</a>
+                           <input class="btn btn-primary btn-lg" type="submit" value="Submit">
+                       </div>
+                   </div>
+               </form>
+
+                <h6>  <%= message %>  </h6>
+
+           </div>
+        </div>
+    </div>
+ </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+</body>
+</html>

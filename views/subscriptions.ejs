@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vip-Chats - Subscriptions</title>
+
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/jquery.dynatable.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.dynatable.js"></script>
+
+    <script src="/js/page.js"></script>
+    <script src="/js/chart.js"></script>
+    <script src="/js/stats.js"></script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+<%- include menu.ejs %>
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Guest Promotion Subscriptions
+                 <h2 name="resultsubscription" id="resultsubscription" ></h2>  
+            </div>
+            <div class="card-body">
+                   <form method="post"> 
+                      <div class="form-group">
+                        <label for="inputphone">Guest Phone (Spanish phones only, no need to enter +34)</label>
+                        <input class="form-control" name="inputphone" id="inputphone" type="text" placeholder="Enter phone">
+                        <input type="radio" name="inputsubscribe" value="subscribe" checked> Subscribe<br>
+                        <input type="radio" name="inputsubscribe" value="unsubscribe"> Unsubscribe<br>
+                      </div>
+                      <input class="btn btn-primary btn-block" type="submit" value="Submit">
+                   </form>
+
+                <h6>  <%= message %>  </h6>
+
+           </div>
+        </div>
+    </div>
+ </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+</body>
+</html>

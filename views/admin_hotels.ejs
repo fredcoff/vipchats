@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vip-Chats - Clients</title>
+
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/jquery.dynatable.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.dynatable.js"></script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+<%- include menu.ejs %>
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-user"></i> Clients
+            </div>
+            <div class="card-body" align="center">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="/admin_hotels_all" class="btn btn-warning"><i class="fa fa-table"></i>&nbsp;List all hotels</a>
+                    </div>
+                </div>
+                <h6>  <%- message %>  </h6>
+                <h4>Look for existing clients</h4>
+               <form method="get">
+                   <div class="row">
+                       <div class="col-md-12">
+                           <div class="form-group">
+                               <label for="inputphone">Hotel Name</label>
+                               <input class="form-control" name="HotelName" id="inputname" type="text" placeholder="Enter name"  value="<%=(typeof reqname!="undefined"?reqname:"")%>" style="max-width:500px" required>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="row">
+                       <div class="col-md-12" align="center">
+                           <a class="btn btn-primary btn-info btn-lg" href="javascript:history.go(-1);">Back</a> &nbsp;
+                           <input class="btn btn-primary btn-lg" type="submit" value="Load">
+                       </div>
+                   </div>
+               </form>
+                <br/>
+                <% if(typeof hotels != "undefined") { %>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Hotel Name</th>
+                            <th>Number of Rooms</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Country</th>
+                            <th>Sub.Type</th>
+                            <th>Sub.Service</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% for(var i=0; i<hotels.length; i++) { %>
+                        <tr onclick="location.href='/admin_hotels_single/<%=hotels[i]['_id']%>'" style="cursor: pointer">
+                            <td><%=hotels[i]['HotelName']%></td>
+                            <td><%=hotels[i]['NumberRooms']%></td>
+                            <td><%=hotels[i]['FirstName']%></td>
+                            <td><%=hotels[i]['LastName']%></td>
+                            <td><%=hotels[i]['Email']%></td>
+                            <td><%=hotels[i]['Phone']%></td>
+                            <td><%=hotels[i]['Country']%></td>
+                            <td><%
+                                    let cls = "";
+                                    if( hotels[i]['MessageService']=='Paid')
+                                        cls='btn btn-success disabled btn-sm mb-0';
+                                    if( hotels[i]['MessageService']=='Trial')
+                                        cls='btn btn-primary disabled btn-sm mb-0';
+                                    if( (new Date(hotels[i]['ExpirationDate_Message'])).getTime() < (new Date()).getTime()) {
+                                        hotels[i]['MessageService'] += ' Expired';
+                                        cls='btn btn-danger disabled btn-sm mb-0';
+                                    }
+                                    hotels[i]['MessageService'] = "<span class='"+cls+"'>"+hotels[i]['MessageService']+"</span>";
+
+                                    cls = "";
+                                    if( hotels[i]['SignService']=='Paid')
+                                        cls='btn btn-success disabled btn-sm mb-0';
+                                    if( hotels[i]['SignService']=='Trial')
+                                        cls='btn btn-primary disabled btn-sm mb-0';
+                                    if( (new Date(hotels[i]['ExpirationDate_Sign'])).getTime() < (new Date()).getTime()) {
+                                        hotels[i]['SignService'] += ' Expired';
+                                        cls='btn btn-danger disabled btn-sm mb-0';
+                                    }
+                                    hotels[i]['SignService'] = "<span class='"+cls+"'>"+hotels[i]['SignService']+"</span>";
+                                %>
+                                <%-hotels[i]['MessageService']%>
+                            </td>
+                            <td>
+                                <%-hotels[i]['SignService']%>
+                            </td>
+                        </tr>
+                        <% } %>
+                        </tbody>
+                    </table>
+                <% } %>
+           </div>
+        </div>
+    </div>
+ </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+</body>
+</html>

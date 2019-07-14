@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vip-Chats - New Client</title>
+
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/jquery.dynatable.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.dynatable.js"></script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+<%- include menu.ejs %>
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <%
+                        let action = "";
+                        if (is_signed) {
+                            action = "/clients_api_sign_clear/"+client['_id'];
+                        }else {
+                            action = "/clients_api_sign/"+client['_id'];
+                        }
+                        %>
+                        <form method="post" action="<%=action%>" >
+                            <div class="row">
+                                <div class="col-md-12" align="center">
+                                    <h5><%=title%></h5>
+                                    <input type="hidden" name="keyname" value="<%=keyname%>"/>
+                                    <textarea style="width:500px;" rows="5" name="signtext" <%=is_signed?"disabled":""%> ><%=signtext%></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12" align="center">
+                                    <% if(is_signed) { %>
+                                    <button class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;Delete</button>
+                                    <% } else{ %>
+                                    <button class="btn btn-primary"><i class="fa fa-check"></i>&nbsp;Sign</button>
+                                    <% }%>
+                                    &nbsp;&nbsp;
+                                    <a href="javascript:window.close();" class="btn btn-warning"><i class="fa fa-times"></i>&nbsp;Close</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+ </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+</body>
+</html>

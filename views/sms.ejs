@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vip-Chats - Subscriptions</title>
+
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/jquery.dynatable.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.dynatable.js"></script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+<%- include menu.ejs %>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Send SMS to Guest
+            </div>
+            <div class="card-body">
+                    <div id="server_msg">
+                    <% if( typeof message != "undefined") {%>
+                   <%-message%>
+                    <% } %>
+                    </div>
+                   <form method="post"> 
+                      <div class="form-group">
+                          <input type="hidden" name="inputtext" id="inputtext"/>
+                          <input type="hidden" name="inputmsgtype" id="inputmsgtype"/>
+                          <label for="inputphone">Guest Phone</label>
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <input class="form-control" name="inputphone" id="inputphone" type="text" placeholder="Enter phone" value="<%=(typeof previous_number!='undefined')?previous_number:'+34'%>" />
+                              </div>
+                              <div class="col-md-2">
+                                  <a class="btn btn-warning" href="javascript:goSentSms()"><i class="fa fa-list"></i> List of Messages Sent</a>
+                              </div>
+                          </div>
+                      </div>
+                       <div class="form-group">
+                          <div>Confirmation Message</div>
+                          <div class="row">
+                              <div class="col-md-8">
+                                  <textarea class="form-control" name="confirm_msg" id="confirm_msg" rows="3"><%=session.user['textWelcomeMsg']%></textarea>
+                              </div>
+                              <div class="col-md-4">
+                                  <a href="javascript:sendSMS('confirm_msg')" class="btn btn-success"><i class="fa fa-send"></i> Send</a>
+                              </div>
+                          </div>
+                       </div>
+                       <div class="form-group">
+                          <div>Cancelation Message</div>
+                          <div class="row">
+                              <div class="col-md-8">
+                                  <textarea class="form-control" name="cancel_msg" id="cancel_msg" rows="3"><%=session.user['textCancelMsg']%></textarea>
+                              </div>
+                              <div class="col-md-4">
+                                  <a href="javascript:sendSMS('cancel_msg')" class="btn btn-success"><i class="fa fa-send"></i> Send</a>
+                              </div>
+                          </div>
+                       </div>
+                       <div class="form-group">
+                          <div>Other Message</div>
+                          <div class="row">
+                              <div class="col-md-8">
+                                  <textarea class="form-control" name="other_msg" id="other_msg" rows="3">Please, enter your message</textarea>
+                              </div>
+                              <div class="col-md-4">
+                                  <a href="javascript:sendSMS('other_msg')" class="btn btn-success"><i class="fa fa-send"></i> Send</a>
+                              </div>
+                          </div>
+                       </div>
+                   </form>
+           </div>
+        </div>
+    </div>
+ </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+<script type="text/javascript">
+function sendSMS( m_id  ){
+    $("#inputtext").val($("#"+m_id).val());
+    $("#inputmsgtype").val( m_id );
+    $("#server_msg").html("<div class='alert alert-warning'><i class='fa fa-spinner'></i> Sending SMS , Please Wait ...</div>");
+    $(".btn").addClass("disabled");
+    $("form").submit();
+}
+
+function goSentSms(){
+    let pn = $("#inputphone").val();
+    if(pn == '' || pn=='+34') pn = 'ALL';
+    location.href='/sms_sent/'+pn;
+}
+</script>
+</body>
+</html>

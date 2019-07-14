@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vip-Chats - Client Data</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/jquery.dynatable.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.dynatable.js"></script>
+</head>
+
+<style>
+    .form-control-plaintext{
+        width:100%;
+    }
+</style>
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+<%- include menu.ejs %>
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h1>Client Data</h1>
+                <h6>  <%- message %>  </h6>
+                <% if(client!=null) { %>
+                <div class="row">
+                    <div class="col-md-8">
+                        <form method="post" action="/clients_api_update/<%=client['_id']%>">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label for="staticEmail" class="col-sm-2 col-form-label">First name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text"  class="form-control" name="firstname" value="<%=client['firstname']%>">
+                                        </div>
+                                    </div><div class="form-group row">
+                                        <label for="staticEmail" class="col-sm-2 col-form-label">Lat name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text"  class="form-control" name="lastname" value="<%=client['lastname']%>">
+                                        </div>
+                                    </div><div class="form-group row">
+                                        <label for="staticEmail" class="col-sm-2 col-form-label">Address</label>
+                                        <div class="col-sm-10">
+                                            <input type="text"  class="form-control" name="city" value="<%=client['city']%>">
+                                        </div>
+                                    </div><div class="form-group row">
+                                        <label for="staticEmail" class="col-sm-2 col-form-label">Phone</label>
+                                        <div class="col-sm-10">
+                                            <input type="text"  class="form-control" name="phone"  value="<%=client['phone']%>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <% if(typeof lastcheckIn != "undefined") { %>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <br/>
+                                            Last CheckIn : <b><%=lastcheckIn['checkIn']%> </b>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12" align="center">
+                                    <span class="btn btn-info btn-lg" onclick="javascript:history.go(-1);"><i class="fa fa-arrow-circle-left"></i>Back</span>
+                                    <button class="btn btn-primary btn-lg" ><i class="fa fa-save"></i> Update</button>
+                                    <span class="btn btn-danger btn-lg" onclick="deleteClient()"><i class="fa fa-trash-o"></i> Delete</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+                        <% if( (new Date(session.user['ExpirationDate_Sign'])).getTime() > (new Date()).getTime()) { %>
+                        <table border="0">
+                            <tr>
+                                <td>
+                                    <div class="form-check form-check-inline">
+                                        <input name="is_protect" class="form-check-input form-control-lg" disabled type="checkbox" <%=(client['is_protect']==true?'checked':'')%> >
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            Data Protection
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <% if (client['is_protect']==true){%>
+                                    <a href="/clients_sign/protect/<%=client['_id']%>" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-search"></i>&nbsp;View</a>
+                                    <% } else{%>
+                                    <a href="/clients_sign/protect/<%=client['_id']%>" target="_blank" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i>&nbsp;Sign</a>
+                                    <% } %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-check form-check-inline">
+                                        <input name="is_promo" class="form-check-input form-control-lg" disabled type="checkbox" <%=(client['is_promo']==true?'checked':'')%>>
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            Promotions
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <% if (client['is_promo']==true){%>
+                                    <a href="/clients_sign/promotion/<%=client['_id']%>" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-search"></i>&nbsp;View</a>
+                                    <% } else{%>
+                                    <a href="/clients_sign/promotion/<%=client['_id']%>" target="_blank" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i>&nbsp;Sign</a>
+                                    <% } %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-check form-check-inline">
+                                        <input name="is_parking" class="form-check-input form-control-lg" disabled type="checkbox" <%=(client['is_parking']==true?'checked':'')%>>
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            Parking
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <% if (client['is_parking']==true){%>
+                                    <a href="/clients_sign/parking/<%=client['_id']%>" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-search"></i>&nbsp;View</a>
+                                    <% } else{%>
+                                    <a href="/clients_sign/parking/<%=client['_id']%>" target="_blank" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i>&nbsp;Sign</a>
+                                    <% } %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-check form-check-inline">
+                                        <input name="is_checkin" class="form-check-input form-control-lg" disabled type="checkbox" <%=(client['is_checkin']==true?'checked':'')%>>
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            CheckIn
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <% if (client['is_checkin']==true){%>
+                                    <a href="/clients_sign/checkin/<%=client['_id']%>" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-search"></i>&nbsp;View</a>
+                                    <% } else{%>
+                                    <a href="/clients_sign/checkin/<%=client['_id']%>" target="_blank" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i>&nbsp;Sign</a>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        </table>
+                        <% } %>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+<form id="deleteform" method="post" action="/clients_api_delete" style="display: none">
+    <input type="hidden" name="_id" value="<%=client['_id']%>"/>
+</form>
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+</a>
+</div>
+<script type="text/javascript">
+function deleteClient() {
+    if(confirm("Are you sure to delete this client?")){
+        $("#deleteform").submit();
+    }
+}
+</script>
+</body>
+</html>

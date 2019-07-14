@@ -1,0 +1,6 @@
+
+Gracias por reservar en el Hotel Sancho III.
+Le esperamos para el dia ${day}.
+Si tiene alguna consulta puede contactarnos
+al telefono +34964414136
+

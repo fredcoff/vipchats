@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vip-Chats - New Client</title>
+
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/jquery.dynatable.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.dynatable.js"></script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+<div class="content-wrapper">
+    <div class="container">
+        <div class="card mb-3">
+            <div class="card-body">
+
+                <% if( message!="") { %>
+                <h1>You must input correct info to sing up!</h1>
+                <%- message %>
+                <% } else { %>
+               <h1 align="center">Thank you for requesting to your 14-day free trial activation</h1>
+                <br/>
+                <h2 class="text-primary" align="center">An email will be sent it to you with instructions
+                    to begin your activation period !</h2>
+                <h2 class="text-primary"  align="center">
+                    Please, use these login credentials to login to your account
+                </h2>
+                <br/>
+                <table class="table table-bordered" style="width:600px;" align="center">
+                    <tr>
+                        <td width="200px;"><b>username</b></td>
+                        <td><%=email%></td>
+                    </tr>
+                    <tr>
+                        <td><b>password</b></td>
+                        <td><%=password%></td>
+                    </tr>
+                </table>
+                 <form action="/login" method="post" align="center">
+                     <input type="hidden" name="inputUsername" value="<%=email%>"/>
+                     <input type="hidden" name="inputPassword" value="<%=password%>"/>
+                     <a href="/login" class="btn btn-info">Go Back!</a>
+                     <input type="submit" class="btn btn-primary" value="Login with this!"/>
+                 </form>
+                <% } %>
+           </div>
+        </div>
+    </div>
+ </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+</body>
+</html>

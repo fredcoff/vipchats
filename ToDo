@@ -1,0 +1,8 @@
+[ ] Check Phone Number before sending Messages.
+[ ] Setup CronJob to send Promotion Messages.
+    [ ] CronJob goes to custom Route.
+    [ ] CronJob is executed everyday.
+[ ] Can Twilio send Links?
+    [ ] Send Link to Cancel Promotion Messages.
+
+[ ] STATISTICS.

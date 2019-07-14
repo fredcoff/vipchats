@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vip-Chats - Setup Signature</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/jquery.dynatable.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.dynatable.js"></script>
+</head>
+
+<style>
+    .form-control-plaintext{
+        width:100%;
+    }
+</style>
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+<%- include menu.ejs %>
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="card mb-3">
+            <div class="card-body" >
+                <h1  align="center">Signature text to sign</h1>
+                <h6>  <%- message %>  </h6>
+                <form method="post" action="/setup_sign_save">
+                    <div class="form-group row">
+                        <div class="col-sm-8">
+                            <h5>Data Protection</h5>
+                            <input type="hidden" name="keyname" value="protect"/>
+                            <textarea style="width: 100%" rows="5" name="signature" ><%=protect_sign%></textarea>
+                            <input type="submit"  class="btn btn-success" value="Submit">
+                        </div>
+                        <div class="col-sm-2">
+                        </div>
+                    </div>
+                </form>
+                <hr/>
+                <form method="post" action="/setup_sign_save">
+                    <div class="form-group row">
+                        <div class="col-sm-8">
+                            <h5>Parking</h5>
+                            <input type="hidden" name="keyname" value="parking"/>
+                            <textarea style="width: 100%" rows="5" name="signature"><%=parking_sign%></textarea>
+                            <input type="submit"  class="btn btn-success" value="Submit">
+                        </div>
+                        <div class="col-sm-2">
+                        </div>
+                    </div>
+                </form>
+                <hr/>
+                <form method="post" action="/setup_sign_save">
+                    <div class="form-group row">
+                        <div class="col-sm-8">
+                            <h5>CheckIn</h5>
+                            <input type="hidden" name="keyname" value="checkin"/>
+                            <textarea style="width: 100%" rows="5" name="signature"><%=checkin_sign%></textarea>
+                            <input type="submit"  class="btn btn-success" value="Submit">
+                        </div>
+                        <div class="col-sm-2">
+                        </div>
+                    </div>
+                </form>
+                <form method="post" action="/setup_sign_save">
+                    <div class="form-group row">
+                        <div class="col-sm-8">
+                            <h5>Promotion</h5>
+                            <input type="hidden" name="keyname" value="promotion"/>
+                            <textarea style="width: 100%" rows="5" name="signature"><%=promotion_sign%></textarea>
+                            <input type="submit"  class="btn btn-success" value="Submit">
+                        </div>
+                        <div class="col-sm-2">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+</a>
+</body>
+</html>

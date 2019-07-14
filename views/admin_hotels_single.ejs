@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vip-Chats - Hotel Data</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/jquery.dynatable.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.dynatable.js"></script>
+</head>
+
+<style>
+    .form-control-plaintext{
+        width:100%;
+    }
+</style>
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+<%- include menu.ejs %>
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h1>Hotel Data</h1>
+                <% if(hotel!=null) { %>
+                <form method="post" action="/admin_api_hotel_update/<%=hotel['_id']%>">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-4 col-form-label">Hotel</label>
+                                <div class="col-sm-8">
+                                    <input type="text"  class="form-control" name="HotelName" value="<%=hotel['HotelName']%>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-4 col-form-label">Message Service</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="MessageService">
+                                        <option <%=(hotel['MessageService']=='Trial'?'selected':'')%>>Trial</option>
+                                        <option <%=(hotel['MessageService']=='Paid'?'selected':'')%>>Paid</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-4 col-form-label">Expiration Date</label>
+                                <div class="col-sm-8">
+                                    <input type="date"  class="form-control" name="ExpirationDate_Message" value="<%=hotel['ExpirationDate_Message']%>"
+                                           placeholder="mm/dd/yyyy" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-4 col-form-label">Rooms</label>
+                                <div class="col-sm-8">
+                                    <input type="number"  class="form-control" name="NumberRooms" value="<%=hotel['NumberRooms']%>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-4 col-form-label">Signature Service</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="SignService">
+                                        <option <%=(hotel['SignService']=='Trial'?'selected':'')%>>Trial</option>
+                                        <option <%=(hotel['SignService']=='Paid'?'selected':'')%>>Paid</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-4 col-form-label">Expiration Date</label>
+                                <div class="col-sm-8">
+                                    <input type="date"  class="form-control" name="ExpirationDate_Sign" value="<%=hotel['ExpirationDate_Sign']%>"
+                                           placeholder="mm/dd/yyyy" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <hr/>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-3 col-form-label">FirstName</label>
+                                <div class="col-sm-9">
+                                    <input type="text"  class="form-control" name="FirstName" value="<%=hotel['FirstName']%>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-3 col-form-label">LastName</label>
+                                <div class="col-sm-9">
+                                    <input type="text"  class="form-control" name="LastName" value="<%=hotel['LastName']%>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-3 col-form-label">Email</label>
+                                <div class="col-sm-9">
+                                    <input type="text"  class="form-control" name="Email" value="<%=hotel['Email']%>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-3 col-form-label">Phone</label>
+                                <div class="col-sm-9">
+                                    <input type="text"  class="form-control" name="Phone" value="<%=hotel['Phone']%>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-3 col-form-label">Address</label>
+                                <div class="col-sm-9">
+                                    <input type="text"  class="form-control" name="Address" value="<%=hotel['Address']%>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-3 col-form-label">Country</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="Country" id="Country" data-initval="<%=hotel['Country']%>">
+                                        <option>
+                                            Spain
+                                        </option>
+                                        <option disabled>────────────────────</option>
+                                        <option>
+                                            Austria
+                                        </option>
+                                        <option>
+                                            Belgium
+                                        </option>
+                                        <option>
+                                            Bulgaria
+                                        </option>
+                                        <option>
+                                            Croatia
+                                        </option>
+                                        <option>
+                                            Cyprus
+                                        </option>
+                                        <option>
+                                            Czech Republic
+                                        </option>
+                                        <option>
+                                            Denmark
+                                        </option>
+                                        <option>
+                                            Estonia
+                                        </option>
+                                        <option>
+                                            Finland
+                                        </option>
+                                        <option>
+                                            France
+                                        </option>
+                                        <option>
+                                            Germany
+                                        </option>
+                                        <option>
+                                            Greece
+                                        </option>
+                                        <option>
+                                            Hungary
+                                        </option>
+                                        <option>
+                                            Ireland
+                                        </option>
+                                        <option>
+                                            Italy
+                                        </option>
+                                        <option>
+                                            Latvia
+                                        </option>
+                                        <option>
+                                            Lithuania
+                                        </option>
+                                        <option>
+                                            Luxembourg
+                                        </option>
+                                        <option>
+                                            Malta
+                                        </option>
+                                        <option>
+                                            Netherlands
+                                        </option>
+                                        <option>
+                                            Poland
+                                        </option>
+                                        <option>
+                                            Portugal
+                                        </option>
+                                        <option>
+                                            Romania
+                                        </option>
+                                        <option>
+                                            Slovakia
+                                        </option>
+                                        <option>
+                                            Slovenia
+                                        </option>
+                                        <option>
+                                            Sweden
+                                        </option>
+                                        <option>
+                                            United Kingdom
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" align="center">
+                            <span class="btn btn-info btn-lg" onclick="javascript:history.go(-1);"><i class="fa fa-arrow-circle-left"></i>Back</span>
+                            <button class="btn btn-primary btn-lg" ><i class="fa fa-save"></i> Update</button>
+                            <span class="btn btn-danger btn-lg" onclick="javascript:deleteHotel();"><i class="fa fa-trash-o"></i>Delete</span>
+                        </div>
+                    </div>
+                </form>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+</a>
+</div>
+<form id="deleteform" method="post" action="/admin_api_hotel_delete/<%=hotel['_id']%>" style="display: none">
+</form>
+
+<script type="text/javascript">
+$("#Country").val($("#Country").data("initval"));
+function deleteHotel() {
+    if(confirm("Are you sure to delete this Hotel? This will delete all hotel data permanently!")){
+        $("#deleteform").submit();
+    }
+}
+
+</script>
+</body>
+</html>

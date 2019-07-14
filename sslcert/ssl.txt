@@ -1,0 +1,4 @@
+
+/etc/letsencrypt/live/www.vipchats.tech/fullchain.pem
+/etc/letsencrypt/live/www.vipchats.tech/privkey.pem
+

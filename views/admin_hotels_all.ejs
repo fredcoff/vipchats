@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vip-Chats - Hotels</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/jquery.dynatable.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.dynatable.js"></script>
+
+    <script src="/js/page.js"></script>
+</head>
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+<%- include menu.ejs %>
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> List of Hotels</div>
+            <div class="card-body">
+                <a href="javascript:location.href='/admin_hotels'" class="btn btn-info"><i class="fa fa-arrow-left"></i> Back</a>
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="clientTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th style="display: none">_id</th>
+                            <th data-dynatable-column="HotelName">Hotel Name</th>
+                            <th data-dynatable-column="NumberRooms">Number of Rooms</th>
+                            <th  data-dynatable-column="FirstName">First Name</th>
+                            <th  data-dynatable-column="LastName">Last Name</th>
+                            <th  data-dynatable-column="Email">Email</th>
+                            <th data-dynatable-column="Phone">Phone</th>
+                            <th  data-dynatable-column="Country">Country</th>
+                            <th  data-dynatable-column="MessageService">Message Service</th>
+                            <th  data-dynatable-column="SignService">Sign Service</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated at <i id="refreshTime">12:00</i></div>
+        </div>
+    </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+<div id="bookingsModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bookings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered" id="bookingTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>From</th>
+                        <th>Booked On</th>
+                        <th>Check In</th>
+                        <th>Check Out</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+$.get('/admin_get_all_hotels',
+    {},
+    function(hotels) {
+    for( let i=0; i< hotels.length; i++) {
+        let cls = "";
+        if( hotels[i]['MessageService']=='Paid')
+            cls='btn btn-success disabled btn-sm mb-0';
+        if( hotels[i]['MessageService']=='Trial')
+            cls='btn btn-primary disabled btn-sm mb-0';
+
+        if( (new Date(hotels[i]['ExpirationDate_Message'])).getTime() < (new Date()).getTime()) {
+            hotels[i]['MessageService'] += ' Expired';
+            cls='btn btn-danger disabled btn-sm mb-0';
+        }
+        hotels[i]['MessageService'] = "<span class='"+cls+"'>"+hotels[i]['MessageService']+"</span>";
+
+        cls = "";
+        if( hotels[i]['SignService']=='Paid')
+            cls='btn btn-success disabled btn-sm mb-0';
+        if( hotels[i]['SignService']=='Trial')
+            cls='btn btn-primary disabled btn-sm mb-0';
+        if( (new Date(hotels[i]['ExpirationDate_Sign'])).getTime() < (new Date()).getTime()) {
+            hotels[i]['SignService'] += ' Expired';
+            cls='btn btn-danger disabled btn-sm mb-0';
+        }
+        hotels[i]['SignService'] = "<span class='"+cls+"'>"+hotels[i]['SignService']+"</span>";
+
+    }
+    $('#clientTable').dynatable({
+        dataset: { records: hotels },
+        features: {
+            search: false,
+            recordCount: false,
+            perPageSelect: false
+        },
+        table: { headRowSelector: 'thead tr' }
+    }).on('click', 'tr', function() {
+        const id =$($(this).find('td')[0]).text();
+        location.href = "/admin_hotels_single/"+id;
+        return;
+    });
+});
+</script>
+</html>

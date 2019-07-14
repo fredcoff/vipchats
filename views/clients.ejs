@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vip-Chats - Clients</title>
+
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/jquery.dynatable.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.dynatable.js"></script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+<%- include menu.ejs %>
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-user"></i> Clients
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="/clients_new" class="btn btn-warning"><i class="fa fa-plus"></i>&nbsp;Create new client</a>
+                        &nbsp;&nbsp;&nbsp;
+                        <a href="/dashboard" class="btn btn-info"><i class="fa fa-table"></i>&nbsp;Show all clients</a>
+                    </div>
+                </div>
+                <h6>  <%- message %>  </h6>
+                <h4>Look for existing clients</h4>
+               <form method="get">
+                   <div class="row">
+                       <div class="col-md-6">
+                           <div class="form-group">
+                               <label for="inputphone">Apellido del cliente</label>
+                               <input class="form-control" name="lastname" id="inputname" type="text" placeholder="Enter name"  value="<%=reqdata['lastname']%>" >
+                           </div>
+                       </div>
+                       <div class="col-md-6">
+                           <label for="inputphone">Guest Phone</label>
+                           <input class="form-control" name="phone" id="inputphone" type="text" placeholder="Enter phone" value="<%=(typeof reqdata['phone']!='undefined')?reqdata['phone']:'+34'%>">
+                       </div>
+                   </div>
+                   <div class="row">
+                       <div class="col-md-12" align="center">
+                           <a class="btn btn-primary btn-info btn-lg" href="javascript:history.go(-1);">Back</a> &nbsp;
+                           <input class="btn btn-primary btn-lg" type="submit" value="Load">
+                       </div>
+                   </div>
+               </form>
+                <br/>
+                <% if(typeof s_clients != "undefined") { %>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Phone</th>
+                            <th>City</th>
+                            <th>Last Booking</th>
+                            <th>Protect</th>
+                            <th>Promotion</th>
+                            <th>Parking</th>
+                            <th>Checkin</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% for(var i=0; i<s_clients.length; i++) { %>
+                        <tr onclick="location.href='/clients_single/<%=s_clients[i]['_id']%>'" style="cursor: pointer">
+                            <td><%=s_clients[i]['firstname']%></td>
+                            <td><%=s_clients[i]['lastname']%></td>
+                            <td><%=s_clients[i]['phone']%></td>
+                            <td><%=s_clients[i]['city']%></td>
+                            <td><%=s_clients[i]['lastbooking']%></td>
+                            <td><%-(s_clients[i]['is_protect']?"<i class='fa fa-shield fa-2x' style='color:deepskyblue'></i>":"")%></td>
+                            <td><%-(s_clients[i]['is_promo']?"<i class='fa fa-thumbs-up fa-2x' style='color:deepskyblue'></i>":"")%></td>
+                            <td><%-(s_clients[i]['is_parking']?"<i class='fa fa-car fa-2x' style='color:deepskyblue'></i>":"")%></td>
+                            <td><%-(s_clients[i]['is_checkin']?"<i class='fa fa-check fa-2x' style='color:deepskyblue'></i>":"")%></td>
+                        </tr>
+                        <% } %>
+                        </tbody>
+                    </table>
+                <% } %>
+           </div>
+        </div>
+    </div>
+ </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+</body>
+</html>

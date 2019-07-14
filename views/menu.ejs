@@ -1,0 +1,117 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <h1 class="navbar-brand" href="">VipChats</h1>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <!--
+        <ul class="navbar-nav  navbar-sidenav" id="exampleAccordion">
+         -->
+        <ul class="navbar-nav" id="exampleAccordion">
+
+            <% if ( session.user.hotelid  ) { %>
+            <li class="nav-item" title="" data-original-title="clients">
+                <a class="nav-link" href="/home">
+                    <i class="fa fa-fw fa-home"></i>
+                    <span class="nav-link-text">Home</span>
+                </a>
+            </li>
+            <li class="nav-item" title="" data-original-title="clients">
+                <a class="nav-link" href="/clients">
+                    <i class="fa fa-fw fa-user"></i>
+                    <span class="nav-link-text">Clients</span>
+                </a>
+            </li>
+            <% if( (new Date(session.user['ExpirationDate_Message'])).getTime() > (new Date()).getTime()) { %>
+            <li class="nav-item" title="" data-original-title="sms">
+                <a class="nav-link" href="/sms">
+                    <i class="fa fa-fw fa-comment-o"></i>
+                    <span class="nav-link-text">sms</span>
+                </a>
+            </li>
+            <% } %>
+            <li class="nav-item" title="" data-original-title="sms">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-fw fa-gear"></i>Setup
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left:initial">
+                    <a class="dropdown-item" href="/setup_account">Account Info</a>
+                    <%if( (new Date(session.user['ExpirationDate_Message'])).getTime() > (new Date()).getTime()) { %>
+                    <a class="dropdown-item" href="/setup_sms">SMS settings</a>
+                    <% } %>
+
+                    <% if( (new Date(session.user['ExpirationDate_Sign'])).getTime() > (new Date()).getTime()) { %>
+                    <a class="dropdown-item" href="/setup_sign">Signature Text</a>
+                    <% } %>
+                </div>
+            </li>
+
+            <!--
+            <li class="nav-item" title="" data-original-title="Dashboard">
+                <a class="nav-link" href="/dashboard">
+                    <i class="fa fa-fw fa-table"></i>
+                    <span class="nav-link-text">All Clients</span>
+                </a>
+            </li>
+            -->
+            <!--
+            <li class="nav-item" title="" data-original-title="Statistics">
+                <a class="nav-link" href="/statistics">
+                    <i class="fa fa-fw fa-area-chart"></i>
+                    <span class="nav-link-text">Statistics</span>
+                </a>
+            </li>
+            -->
+            <!--
+            <li class="nav-item" title="" data-original-title="subscriptions">
+                <a class="nav-link" href="/subscriptions">
+                    <i class="fa fa-fw fa-thumbs-up"></i>
+                    <span class="nav-link-text">subscriptions</span>
+                </a>
+            </li>
+            -->
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li class="nav-item" title="" data-original-title="Logout">
+                <a class="nav-link" href="/logout">
+                    <i class="fa fa-fw  fa-close"></i>
+                    <span class="nav-link-text">Logout</span>
+                </a>
+            </li>
+            <% } else if ( session.user.is_admin ){ %>
+            <li class="nav-item" title="" data-original-title="clients">
+                <a class="nav-link" href="/admin_dash">
+                    <i class="fa fa-fw fa-home"></i>
+                    <span class="nav-link-text">Home</span>
+                </a>
+            </li>
+            <li class="nav-item" title="" data-original-title="clients">
+                <a class="nav-link" href="/admin_hotels">
+                    <i class="fa fa-fw fa-building"></i>
+                    <span class="nav-link-text">Hotels</span>
+                </a>
+            </li>
+            <li class="nav-item" title="" data-original-title="Logout">
+                <a class="nav-link" href="/logout">
+                    <i class="fa fa-fw  fa-close"></i>
+                    <span class="nav-link-text">Logout</span>
+                </a>
+            </li>
+            <% } %>
+        </ul>
+        <!--
+        <ul class="navbar-nav sidenav-toggler">
+            <li class="nav-item">
+                <a class="nav-link text-center" id="sidenavToggler">
+                    <i class="fa fa-fw fa-angle-left"></i>
+                </a>
+            </li>
+        </ul>
+        -->
+    </div>
+</nav>
+
+<script>
+/* Disabling AJAX Cache in pages!*/
+$.ajaxSetup({ cache: false });
+</script>
